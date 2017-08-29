@@ -15,7 +15,6 @@ from golem.network.p2p.node import Node
 from golem.task.taskbase import TaskHeader, ComputeTaskDef
 from golem.task.taskkeeper import CompTaskInfo
 from golem.task.taskkeeper import TaskHeaderKeeper, CompTaskKeeper, CompSubtaskInfo, logger
-from golem.testutils import PEP8MixIn
 from golem.testutils import TempDirFixture
 from golem.tools.assertlogs import LogTestCase
 
@@ -257,9 +256,11 @@ def get_dict_task_header():
 
 def get_task_header():
     header = get_dict_task_header()
-    return TaskHeader(header["node_name"], header["task_id"], header["task_owner_address"],
+    return TaskHeader(header["node_name"], header["task_id"],
+                      header["task_owner_address"],
                       header["task_owner_port"], header["task_owner_key_id"],
-                      header["environment"], header["task_owner"], header["deadline"],
+                      header["environment"], header["task_owner"],
+                      header["deadline"],
                       header["subtask_timeout"], 1024, 1.0, 1000)
 
 
@@ -269,7 +270,7 @@ class TestCompSubtaskInfo(TestCase):
         self.assertIsInstance(csi, CompSubtaskInfo)
 
 
-class TestCompTaskKeeper(LogTestCase, PEP8MixIn, TempDirFixture):
+class TestCompTaskKeeper(LogTestCase, TempDirFixture):
     PEP8_FILES = [
         "golem/task/taskkeeper.py",
     ]
